@@ -90,10 +90,42 @@ class WhereIssController extends Controller
         return $result;
     }
 
-    public function isForecast($latitude, $longitude, $units)
+    public function location(Request $request)
     {
+        $timestamps = $this->setTimestamps($request->timestamp);
         
-        
-        return $result['condition'];
+        $endpoint = 'positions?timestamps='. $timestamps .'&units=miles';
+
+        $url = 'https://api.wheretheiss.at/v1/satellites/25544/';
+
+        //Initialize Guzzle Client
+        $client = new \GuzzleHttp\Client(['base_uri' => $url]);
+        $response = $client->request('GET', $endpoint, ['verify' => false]);
+        $res = '';
+        if($response->getStatusCode() == 200){
+            $res = json_decode($response->getBody(), true);
+        }
+
+        $weather = new OpenWeather();
+        $condition = [];
+        foreach ($res as $key => $response) {
+            // code...
+            try {
+                $result = $weather->getCurrentWeatherByCoords($response['latitude'], $response['longitude'], 'kelvin');
+            } catch (\Exception $e) {
+                $result = [];
+                continue;
+            }
+            $condition[$key] = $result;
+        }
+        for($i=0;$i<count($res);$i++) {
+            if(isset($condition[$i])){
+                $res[$i]['weather'] = $condition[$i];
+            } else {
+                $res[$i]['weather'] = null;
+            }
+        }
+
+        return $res;
     }
 }
