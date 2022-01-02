@@ -11,7 +11,7 @@ Enter to your webroot folder and run
  - cp .env.example .env
  - php artisan key:generate
  - Edit .env file and change database configuration username, password and database name
- - No need db coz we dont use one
+ - No need db coz this application didn't need one
 
 ## Serve Application
  - php artisan serve
@@ -24,3 +24,7 @@ Untuk load helper customization
  - http://open-notify.org/Open-Notify-API/ (get people in space)
  - https://wheretheiss.at/ (get position of iss)
  - https://openweathermap.org/ (get weather information)
+
+## API call
+ - {{ APP_URL }}/api/iss/people
+ - {{ APP_URL }}/api/iss/location/{timestamp}
