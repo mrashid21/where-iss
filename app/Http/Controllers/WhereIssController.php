@@ -39,7 +39,14 @@ class WhereIssController extends Controller
             }
             $condition[$key] = $result;
         }
-        return view('location', compact('res', 'condition'));
+        for($i=0;$i<count($res);$i++) {
+            if(isset($condition[$i])){
+                $res[$i]['weather'] = $condition[$i];
+            } else {
+                $res[$i]['weather'] = null;
+            }
+        }
+        return view('location', compact('res'));
     }
 
     public static function issPeople()

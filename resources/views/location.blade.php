@@ -94,11 +94,11 @@
                                             Altitude : {{ $result['altitude'] }} <br>
                                         </td>
                                         <td>
-                                            @if(isset($condition[$key]))
-                                                Location : {{ $condition[$key]['location']['name'] }} <br>
-                                                Sunrise : {{ $condition[$key]['datetime']['formatted_sunrise'] }} <br>
-                                                Sunset : {{ $condition[$key]['datetime']['formatted_sunset'] }} <br>
-                                                Condition : {{ $condition[$key]['condition']['name'] }}
+                                            @if($result['weather'])
+                                                Location : {{ $result['weather']['location']['name'] }} <br>
+                                                Sunrise : {{ $result['weather']['datetime']['formatted_sunrise'] }} <br>
+                                                Sunset : {{ $result['weather']['datetime']['formatted_sunset'] }} <br>
+                                                Condition : {{ $result['weather']['condition']['name'] }}
                                             @else
                                                 No information ...
                                             @endif
