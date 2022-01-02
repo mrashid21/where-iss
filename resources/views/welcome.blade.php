@@ -81,18 +81,20 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Where-ISS
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <form action="{{ route('iss.location') }}" method="POST" role="form">
+                        
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Timestamps</label>
+                            <input type="datetime-local" class="form-control" id="" name="timestamp" placeholder="datetime">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    
                 </div>
             </div>
         </div>
