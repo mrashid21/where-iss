@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client; 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
+use Dnsimmons\OpenWeather\OpenWeather;
 
 class WhereIssController extends Controller
 {
@@ -25,7 +26,20 @@ class WhereIssController extends Controller
         if($response->getStatusCode() == 200){
             $res = json_decode($response->getBody(), true);
         }
-        return view('location', compact('res'));
+
+        $weather = new OpenWeather();
+        $condition = [];
+        foreach ($res as $key => $response) {
+            // code...
+            try {
+                $result = $weather->getCurrentWeatherByCoords($response['latitude'], $response['longitude'], 'kelvin');
+            } catch (\Exception $e) {
+                $result = [];
+                continue;
+            }
+            $condition[$key] = $result;
+        }
+        return view('location', compact('res', 'condition'));
     }
 
     public static function issPeople()
@@ -64,5 +78,12 @@ class WhereIssController extends Controller
         }
 
         return $result;
+    }
+
+    public function isForecast($latitude, $longitude, $units)
+    {
+        
+        
+        return $result['condition'];
     }
 }

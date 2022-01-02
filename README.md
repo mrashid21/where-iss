@@ -19,3 +19,8 @@ Enter to your webroot folder and run
 ## Dump autoload
 Untuk load helper customization
  - composer dump-autoload
+
+## API used
+ - http://open-notify.org/Open-Notify-API/ (get people in space)
+ - https://wheretheiss.at/ (get position of iss)
+ - https://openweathermap.org/ (get weather information)

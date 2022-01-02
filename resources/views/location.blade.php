@@ -72,14 +72,42 @@
                 </div>
 
                 <div class="">
-                    @foreach($res as $key => $result)
-                        Timestamp : {{ date("m/d/Y h:i:s A T",$result['timestamp']) }} <br>
-                        Latitude : {{ $result['latitude'] }} <br>
-                        Longitude : {{ $result['longitude'] }} <br>
-                        Altitude : {{ $result['altitude'] }} <br>
-                        <hr>
-
-                    @endforeach
+                    <div class="table-responsive">
+                        <table border="1" width="100%" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Information</th>
+                                    <th>Weather</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($res as $key => $result)
+                                    <tr>
+                                        <td>
+                                            {{ date("m/d/Y h:i:s A T",$result['timestamp']) }} <br>
+                                            {{ $result['timestamp'] }}
+                                        </td>
+                                        <td>
+                                            Latitude : {{ $result['latitude'] }} <br>
+                                            Longitude : {{ $result['longitude'] }} <br>
+                                            Altitude : {{ $result['altitude'] }} <br>
+                                        </td>
+                                        <td>
+                                            @if(isset($condition[$key]))
+                                                Location : {{ $condition[$key]['location']['name'] }} <br>
+                                                Sunrise : {{ $condition[$key]['datetime']['formatted_sunrise'] }} <br>
+                                                Sunset : {{ $condition[$key]['datetime']['formatted_sunset'] }} <br>
+                                                Condition : {{ $condition[$key]['condition']['name'] }}
+                                            @else
+                                                No information ...
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
