@@ -25,7 +25,7 @@ class WhereIssController extends Controller
         if($response->getStatusCode() == 200){
             $res = json_decode($response->getBody(), true);
         }
-        return $res;
+        return view('location', compact('res'));
     }
 
     public function setTimestamps($timestamp)
