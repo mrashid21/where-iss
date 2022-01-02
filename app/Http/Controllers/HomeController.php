@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\WhereIssController;
 
 class HomeController extends Controller
 {
@@ -14,4 +15,10 @@ class HomeController extends Controller
                     // <a href="https://forge.laravel.com">Forge</a>
                     // <a href="https://vapor.laravel.com">Vapor</a>
                     // <a href="https://github.com/laravel/laravel">GitHub</a>
+    public function index()
+    {
+        $people = WhereIssController::issPeople();
+        // dd($people);
+        return view('welcome', compact('people'));
+    }
 }

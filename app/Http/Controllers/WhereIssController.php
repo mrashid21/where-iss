@@ -28,6 +28,20 @@ class WhereIssController extends Controller
         return view('location', compact('res'));
     }
 
+    public static function issPeople()
+    {
+        $url = 'http://api.open-notify.org/astros.json';
+
+        //Initialize Guzzle Client
+        $client = new \GuzzleHttp\Client(['base_uri' => $url]);
+        $response = $client->request('GET');
+        $res = '';
+        if($response->getStatusCode() == 200){
+            $res = json_decode($response->getBody(), true);
+        }
+        return $res;
+    }
+
     public function setTimestamps($timestamp)
     {
         $result = $timestamp - 3600;
