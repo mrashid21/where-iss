@@ -88,7 +88,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="">Timestamps</label>
-                            <input type="datetime-local" class="form-control" id="" name="timestamp" placeholder="datetime">
+                            <input type="datetime-local" class="form-control" id="" name="timestamp" placeholder="datetime" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

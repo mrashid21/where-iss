@@ -12,7 +12,10 @@ class WhereIssController extends Controller
 {
     //
     public function issLocation(Request $request)
-    {
+    {   
+        if ($request->timestamp == null) {
+            return redirect()->back();
+        }
         $timestamps = $this->setTimestamps(strtotime($request->timestamp));
         
         $endpoint = 'positions?timestamps='. $timestamps .'&units=miles';
